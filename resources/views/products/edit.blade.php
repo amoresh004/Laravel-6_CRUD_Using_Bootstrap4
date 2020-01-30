@@ -12,6 +12,16 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 offset-3">
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    
                     @if(Session::has('success'))
                     <div class="alert alert-success"> {{ Session::get('success') }} </div>
                     @endif
@@ -28,7 +38,6 @@
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Update</button>
-                                <button class="btn btn-primary" type="submit"><a href="{{route('products.index')}}"></a> Cancel</button>
                             </div>
                         </form>
                     </div>

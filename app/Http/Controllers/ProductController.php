@@ -12,6 +12,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index()
     {
         $products =Product::all();
@@ -36,7 +39,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $this->validate($request, [
+            'name'=>'required',
+            'details'=>'required'
+        ]);
          Product::create([
             'name'       => $request->name,
             'details'   => $request->details,
@@ -79,6 +85,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product, $id)
     {
+        $this->validate($request, [
+            'name'=>'required',
+            'details'=>'required'
+        ]);
         $product = Product::find($id);
         $product->name = $request->name;
         $product->details = $request->details;

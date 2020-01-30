@@ -24,6 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @if($products->count() >0 )
                         @foreach ($products as $product)
                             <tr>
                                 <td>{{ $product->id }}</td>
@@ -31,10 +32,17 @@
                                 <td>{{ $product->details }}</td>
                                 <td>
                                     <a class="btn btn-warning btn-sm" href="{{ route('products.edit', ['id' =>$product->id]) }}">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="{{ route('products.destroy', ['id' =>$product->id]) }}">Delete</a>
+                                    <a class="btn btn-danger btn-sm ml-2" href="{{ route('products.destroy', ['id' =>$product->id]) }}">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="4">
+                                        <h5 class="text-center mt-3">No Post Founds</h5>
+                                    </td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
